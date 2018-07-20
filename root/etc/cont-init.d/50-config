@@ -1,0 +1,17 @@
+#!/usr/bin/with-contenv bash
+
+# create folders
+mkdir -p \
+	/config
+
+if [ ! -f "/config/config.php" ]; then
+	mv /defaults/config.php /config/config.php
+fi
+
+rm /app/TwoFactorAuth/config.php
+ln -s /config/config.php /app/TwoFactorAuth/config.php
+
+# permissions
+chown -R abc:abc \
+	/app/TwoFactorAuth \
+	/config
